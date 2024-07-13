@@ -1,0 +1,37 @@
+2024-06-22 21:30:30.687 +03:00 [INF] Executed DbCommand (1,167ms) [Parameters=[], CommandType='"Text"', CommandTimeout='60']
+CREATE DATABASE [cleanarchitecture];
+2024-06-22 21:30:31.134 +03:00 [INF] Executed DbCommand (383ms) [Parameters=[], CommandType='"Text"', CommandTimeout='60']
+IF SERVERPROPERTY('EngineEdition') <> 5
+BEGIN
+    ALTER DATABASE [cleanarchitecture] SET READ_COMMITTED_SNAPSHOT ON;
+END;
+2024-06-22 21:30:31.180 +03:00 [INF] Executed DbCommand (20ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2024-06-22 21:30:31.544 +03:00 [INF] Executed DbCommand (313ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE [__EFMigrationsHistory] (
+    [MigrationId] nvarchar(150) NOT NULL,
+    [ProductVersion] nvarchar(32) NOT NULL,
+    CONSTRAINT [PK___EFMigrationsHistory] PRIMARY KEY ([MigrationId])
+);
+2024-06-22 21:30:31.555 +03:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2024-06-22 21:30:31.586 +03:00 [INF] Executed DbCommand (26ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT OBJECT_ID(N'[__EFMigrationsHistory]');
+2024-06-22 21:30:31.664 +03:00 [INF] Executed DbCommand (72ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [MigrationId], [ProductVersion]
+FROM [__EFMigrationsHistory]
+ORDER BY [MigrationId];
+2024-06-22 21:30:31.686 +03:00 [INF] Applying migration '20240622182329_Init_Database'.
+2024-06-22 21:30:31.727 +03:00 [INF] Executed DbCommand (19ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE [Contributors] (
+    [Id] int NOT NULL IDENTITY,
+    [Name] nvarchar(100) NOT NULL,
+    [Status] int NOT NULL,
+    [PhoneNumber_CountryCode] nvarchar(max) NULL,
+    [PhoneNumber_Number] nvarchar(max) NULL,
+    [PhoneNumber_Extension] nvarchar(max) NULL,
+    CONSTRAINT [PK_Contributors] PRIMARY KEY ([Id])
+);
+2024-06-22 21:30:31.774 +03:00 [INF] Executed DbCommand (40ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
+VALUES (N'20240622182329_Init_Database', N'8.0.2');

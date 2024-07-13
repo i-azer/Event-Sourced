@@ -1,0 +1,85 @@
+2024-07-13 12:05:40.675 +03:00 [INF] Registered 5 endpoints in 2,632 milliseconds.
+2024-07-13 12:05:43.843 +03:00 [INF] Executed DbCommand (21ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2024-07-13 12:05:43.881 +03:00 [INF] Executed DbCommand (21ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+
+IF EXISTS
+    (SELECT *
+     FROM [sys].[objects] o
+     WHERE [o].[type] = 'U'
+     AND [o].[is_ms_shipped] = 0
+     AND NOT EXISTS (SELECT *
+         FROM [sys].[extended_properties] AS [ep]
+         WHERE [ep].[major_id] = [o].[object_id]
+             AND [ep].[minor_id] = 0
+             AND [ep].[class] = 1
+             AND [ep].[name] = N'microsoft_database_tools_support'
+    )
+)
+SELECT 1 ELSE SELECT 0
+2024-07-13 12:05:44.163 +03:00 [INF] Executed DbCommand (4ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Contributors] AS [c]) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+2024-07-13 12:05:44.247 +03:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [c].[Id], [c].[Name], [c].[Status], [c].[PhoneNumber_CountryCode], [c].[PhoneNumber_Extension], [c].[PhoneNumber_Number]
+FROM [Contributors] AS [c]
+2024-07-13 12:05:44.769 +03:00 [INF] Executed DbCommand (340ms) [Parameters=[@p0='?' (Size = 100), @p1='?' (DbType = Int32), @p2='?' (Size = 100), @p3='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+MERGE [Contributors] USING (
+VALUES (@p0, @p1, 0),
+(@p2, @p3, 1)) AS i ([Name], [Status], _Position) ON 1=0
+WHEN NOT MATCHED THEN
+INSERT ([Name], [Status])
+VALUES (i.[Name], i.[Status])
+OUTPUT INSERTED.[Id], i._Position;
+2024-07-13 12:05:45.466 +03:00 [INF] Now listening on: https://localhost:57679
+2024-07-13 12:05:45.469 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2024-07-13 12:05:45.470 +03:00 [INF] Hosting environment: Development
+2024-07-13 12:05:45.472 +03:00 [INF] Content root path: E:\test-lap\NimblePros\Ibra.ArdaPilot\src\Ibra.ArdaPilot.Web
+2024-07-13 12:05:46.231 +03:00 [INF] Request starting HTTP/2 GET https://localhost:57679/swagger - null null
+2024-07-13 12:05:46.570 +03:00 [INF] Request finished HTTP/2 GET https://localhost:57679/swagger - 302 0 null 344.2423ms
+2024-07-13 12:05:46.575 +03:00 [INF] Request starting HTTP/2 GET https://localhost:57679/swagger/index.html - null null
+2024-07-13 12:05:46.774 +03:00 [INF] Request finished HTTP/2 GET https://localhost:57679/swagger/index.html - 200 null text/html; charset=utf-8 198.7243ms
+2024-07-13 12:05:46.780 +03:00 [INF] Request starting HTTP/2 GET https://localhost:57679/swagger/swagger-ui.css - null null
+2024-07-13 12:05:46.780 +03:00 [INF] Request starting HTTP/2 GET https://localhost:57679/swagger/index.css - null null
+2024-07-13 12:05:46.780 +03:00 [INF] Request starting HTTP/2 GET https://localhost:57679/swagger/swagger-ui-standalone-preset.js - null null
+2024-07-13 12:05:46.781 +03:00 [INF] Request starting HTTP/2 GET https://localhost:57679/_vs/browserLink - null null
+2024-07-13 12:05:46.780 +03:00 [INF] Request starting HTTP/2 GET https://localhost:57679/swagger/swagger-ui-bundle.js - null null
+2024-07-13 12:05:46.781 +03:00 [INF] Request starting HTTP/2 GET https://localhost:57679/_framework/aspnetcore-browser-refresh.js - null null
+2024-07-13 12:05:46.802 +03:00 [INF] Sending file. Request path: '/index.css'. Physical path: 'N/A'
+2024-07-13 12:05:46.805 +03:00 [INF] Request finished HTTP/2 GET https://localhost:57679/swagger/index.css - 200 218 text/css 24.6345ms
+2024-07-13 12:05:46.827 +03:00 [INF] Request finished HTTP/2 GET https://localhost:57679/_framework/aspnetcore-browser-refresh.js - 200 13772 application/javascript; charset=utf-8 45.9995ms
+2024-07-13 12:05:46.835 +03:00 [INF] Sending file. Request path: '/swagger-ui.css'. Physical path: 'N/A'
+2024-07-13 12:05:46.835 +03:00 [INF] Sending file. Request path: '/swagger-ui-standalone-preset.js'. Physical path: 'N/A'
+2024-07-13 12:05:46.841 +03:00 [INF] Request finished HTTP/2 GET https://localhost:57679/swagger/swagger-ui.css - 200 151213 text/css 60.6731ms
+2024-07-13 12:05:46.841 +03:00 [INF] Request finished HTTP/2 GET https://localhost:57679/swagger/swagger-ui-standalone-preset.js - 200 230642 text/javascript 60.4438ms
+2024-07-13 12:05:46.859 +03:00 [INF] Sending file. Request path: '/swagger-ui-bundle.js'. Physical path: 'N/A'
+2024-07-13 12:05:46.861 +03:00 [INF] Request finished HTTP/2 GET https://localhost:57679/swagger/swagger-ui-bundle.js - 200 1385018 text/javascript 80.2581ms
+2024-07-13 12:05:46.880 +03:00 [INF] Request finished HTTP/2 GET https://localhost:57679/_vs/browserLink - 200 null text/javascript; charset=UTF-8 98.9993ms
+2024-07-13 12:05:47.042 +03:00 [INF] Request starting HTTP/2 GET https://localhost:57679/swagger/v1/swagger.json - null null
+2024-07-13 12:05:47.059 +03:00 [INF] Request starting HTTP/2 GET https://localhost:57679/swagger/favicon-32x32.png - null null
+2024-07-13 12:05:47.061 +03:00 [INF] Sending file. Request path: '/favicon-32x32.png'. Physical path: 'N/A'
+2024-07-13 12:05:47.064 +03:00 [INF] Request finished HTTP/2 GET https://localhost:57679/swagger/favicon-32x32.png - 200 628 image/png 4.822ms
+2024-07-13 12:05:47.094 +03:00 [INF] No action descriptors found. This may indicate an incorrectly configured application or missing application parts. To learn more, visit https://aka.ms/aspnet/mvc/app-parts
+2024-07-13 12:05:47.744 +03:00 [INF] Request finished HTTP/2 GET https://localhost:57679/swagger/v1/swagger.json - 200 null application/json; charset=utf-8 702.3769ms
+2024-07-13 12:07:29.594 +03:00 [INF] Request starting HTTP/2 GET https://localhost:57679/swagger/index.html - null null
+2024-07-13 12:07:29.603 +03:00 [INF] Request finished HTTP/2 GET https://localhost:57679/swagger/index.html - 200 null text/html; charset=utf-8 9.3334ms
+2024-07-13 12:07:29.614 +03:00 [INF] Request starting HTTP/2 GET https://localhost:57679/_vs/browserLink - null null
+2024-07-13 12:07:29.615 +03:00 [INF] Request starting HTTP/2 GET https://localhost:57679/_framework/aspnetcore-browser-refresh.js - null null
+2024-07-13 12:07:29.623 +03:00 [INF] Request finished HTTP/2 GET https://localhost:57679/_framework/aspnetcore-browser-refresh.js - 200 13772 application/javascript; charset=utf-8 8.7648ms
+2024-07-13 12:07:29.630 +03:00 [INF] Request finished HTTP/2 GET https://localhost:57679/_vs/browserLink - 200 null text/javascript; charset=UTF-8 16.128ms
+2024-07-13 12:07:29.753 +03:00 [INF] Request starting HTTP/2 GET https://localhost:57679/swagger/v1/swagger.json - null null
+2024-07-13 12:07:29.764 +03:00 [INF] Request finished HTTP/2 GET https://localhost:57679/swagger/v1/swagger.json - 200 null application/json; charset=utf-8 11.3318ms
+2024-07-13 12:07:48.707 +03:00 [INF] Request starting HTTP/2 GET https://localhost:57679/swagger/index.html - null null
+2024-07-13 12:07:48.714 +03:00 [INF] Request finished HTTP/2 GET https://localhost:57679/swagger/index.html - 200 null text/html; charset=utf-8 7.4228ms
+2024-07-13 12:07:48.723 +03:00 [INF] Request starting HTTP/2 GET https://localhost:57679/_vs/browserLink - null null
+2024-07-13 12:07:48.723 +03:00 [INF] Request starting HTTP/2 GET https://localhost:57679/_framework/aspnetcore-browser-refresh.js - null null
+2024-07-13 12:07:48.728 +03:00 [INF] Request finished HTTP/2 GET https://localhost:57679/_framework/aspnetcore-browser-refresh.js - 200 13772 application/javascript; charset=utf-8 5.58ms
+2024-07-13 12:07:48.734 +03:00 [INF] Request finished HTTP/2 GET https://localhost:57679/_vs/browserLink - 200 null text/javascript; charset=UTF-8 11.9257ms
+2024-07-13 12:07:48.771 +03:00 [INF] Request starting HTTP/2 GET https://localhost:57679/swagger/v1/swagger.json - null null
+2024-07-13 12:07:48.774 +03:00 [INF] Request finished HTTP/2 GET https://localhost:57679/swagger/v1/swagger.json - 200 null application/json; charset=utf-8 3.9096ms
